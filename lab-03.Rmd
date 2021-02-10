@@ -37,13 +37,34 @@ nobel_living <- nobel %>%
 glimpse(nobel_living)
 ```
 
+### Defining Dataframe
 
+```{r mutate-country_us}
+nobel_living <- nobel_living %>%
+  mutate(
+    country_us = if_else(country == "USA", "USA", "Other")
+  ) 
+```
+
+```{r filter-by-science}
+nobel_living_science <- nobel_living %>%
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
 ### Exercise 3
+```{r plot-country-by-category}
+ggplot(data = nobel_living_science, 
+      mapping = aes(x = country_us,
+                    color = country_us, fill = country_us)) +
+    geom_bar() +
+    coord_flip() +
+    facet_wrap(~ category) +
+  labs(title = "US vs. non-US Laureates by Category", 
+       x = "Living in US or other",
+       y = "Number of laureates") 
+  
+```
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+It appears to be true that more nobel laureates were living in the US when they received their prize than were living in other countries. This imbalance is most true in the category of economics, and least true in the category of chemistry.
 
 ### Exercise 4
 
