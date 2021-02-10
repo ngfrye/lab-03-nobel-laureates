@@ -96,5 +96,16 @@ It's true that many of the US-based nobel laureates were born in other countries
 ...
 
 ### Exercise 6
+```{r frequency-outside-us}
+nobel_living_science %>%
+  filter(country == "USA" & born_country_us == "Other") %>%
+  count(born_country) %>%
+  arrange(desc(n))
+```
 
+```{r frequency-outside-us-one-pipe}
+arrange(count(filter(dataset == "nobel_living_science"), country == "USA" & born_country_us == "Other"), born_country) desc(n)
+```
+
+Germany is the most common.
 ...
