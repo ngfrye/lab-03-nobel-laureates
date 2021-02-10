@@ -67,11 +67,32 @@ ggplot(data = nobel_living_science,
 It appears to be true that more nobel laureates were living in the US when they received their prize than were living in other countries. This imbalance is most true in the category of economics, and least true in the category of chemistry.
 
 ### Exercise 4
+```{r mutate-born-us}
+nobel_living_science <- nobel_living_science %>%
+  mutate(
+    born_country_us = if_else(born_country == "USA", "USA", "Other")
+  ) 
+nobel_living_science %>%
+  filter(born_country_us == "USA")
+```
 
+105 of the winners are born in the US.
 ...
 
 ### Exercise 5
+```{r plot-country-born}
+ggplot(data = nobel_living_science, 
+      mapping = aes(x = country_us,
+                    fill = born_country_us)) +
+    geom_bar() +
+    coord_flip() +
+    facet_wrap(~ category) +
+  labs(title = "US vs. non-US Laureates by Category", 
+       x = "Living in US or other",
+       y = "Number of laureates") 
+```
 
+It's true that many of the US-based nobel laureates were born in other countries, although the majority of them were born in the US in every category. Overall, I would say that Buzzfeed's argument about the importance of immigration to American science is valid, thought it might deserve more nuance. 
 ...
 
 ### Exercise 6
