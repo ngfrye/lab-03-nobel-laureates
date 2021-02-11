@@ -103,9 +103,5 @@ nobel_living_science %>%
   arrange(desc(n))
 ```
 
-```{r frequency-outside-us-one-pipe}
-arrange(count(filter(dataset == "nobel_living_science"), country == "USA" & born_country_us == "Other"), born_country) desc(n)
-```
-
 Germany is the most common.
 ...
